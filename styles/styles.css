@@ -45,12 +45,12 @@ body {
 
 .left-part {
     grid-area: 1 / 1 / 2 / 2;
-    background-image: url("images/photo1.JPG");
+    background-image: url("../images/photo1.JPG");
 }
 
 .right-part {
     grid-area: 1 / 2 / 2 / 3;
-    background-image: url("images/photo2.JPG");
+    background-image: url("../images/photo2.JPG");
 }
 
 .main-title {
@@ -85,18 +85,30 @@ body {
 
 .part-1 {
     grid-area: 1 / 1 / 2 / 2;
-    background-image: url("images/part-1.JPG");
+    background-image: url("../images/part-1.JPG");
     position: relative;
+
+    transform: translate(-300%);
+    transition: transform 2s ease;
 }
+
+.part-1.show {
+    transform: translate(0);
+}
+
+.part-1.leave {
+    transform: translate(-300%);
+}
+
 
 .part-2 {
     grid-area: 1 / 3 / 2 / 4;
-    background-image: url("images/part-2.JPG");
+    background-image: url("../images/part-2.JPG");
 }
 
 .part-3 {
     grid-area: 1 / 5 / 2 / 6;
-    background-image: url("images/part-3.JPG");
+    background-image: url("../images/part-3.JPG");
 }
 
 .part-1-text, .part-2-text, .part-3-text {
@@ -126,4 +138,27 @@ body {
     height: 100vh;
     grid-template-columns: 1fr 1fr;
     scroll-snap-align: start;
+}
+
+.left-part-2,
+.right-part-2 {
+    background-size: cover;
+    background-position: 0% 0%;
+    background-repeat: no-repeat;
+}
+
+.left-part-2 {
+    grid-area: 1 / 1 / 2 / 2;
+    background-image: url("../images/photo3.JPG");
+}
+
+.right-part-2 {
+    grid-area: 1 / 2 / 2 / 3;
+    background-image: url("../images/photo4.JPG");
+}
+
+.fade-out {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
