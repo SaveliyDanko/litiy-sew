@@ -1,0 +1,65 @@
+@use '../helpers' as *;
+
+.header {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: rem(20) rem(50) rem(20) rem(20);
+    z-index: 10;
+
+    &__logo-link {
+        font-size: rem(60);
+        letter-spacing: 15%;
+        font-family: var(--font-family-logo);
+
+        @include mobile {
+            font-size: rem(20)
+        }
+    }
+
+    .header__burger-button {
+        @include square(rem(60));
+        position: relative;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+    
+        @include mobile {
+            @include square(rem(20));
+        }
+
+        .burger-line {
+            position: absolute;
+            left: 50%;
+            width: 100%;
+            height: rem(4);
+            background-color: var(--color-dark);
+            border-radius: 1rem;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            transform-origin: center;
+            transform: translateX(-50%);
+        }
+
+        .burger-line:nth-child(1) { top: 16.667%; }
+        .burger-line:nth-child(2) { top: 50%; }
+        .burger-line:nth-child(3) { top: 83.333%; }
+        
+
+        &.is-active {
+            .burger-line:nth-child(1) {
+                top: 50%;
+                transform: translate(-50%, -50%) rotate(45deg);
+            }
+
+            .burger-line:nth-child(2) {
+              opacity: 0;
+            }
+
+            .burger-line:nth-child(3) {
+              top: 50%;
+              transform: translate(-50%, -50%) rotate(-45deg);
+            }
+        }       
+    }
+}

@@ -1,0 +1,63 @@
+@use 'helpers' as *;
+
+body {
+    @include fluid-text(32, 16);
+
+    font-family: var(--font-family-base);
+    color: var(--color-dark);
+
+    background-color: var(--color-light);
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+    color: var(--color-dark);
+    font-weight: 400;
+}
+
+h1, .h1 {
+    @include fluid-text(390, 40);
+    font-family: var(--font-family-logo);
+    letter-spacing: 15%;
+}
+
+h2, .h2 {
+    @include fluid-text(65, 25);
+    font-family: var(--font-family-base);
+}
+
+h6, .h6 {
+    @include fluid-text(32, 14);
+    font-family: var(--font-family-base);
+}
+
+a,
+button,
+label,
+input,
+textarea,
+svg * {
+    transition-duration: var(--transition-duration);
+}
+
+a {
+    color: inherit;
+
+    @include hover {
+        color: grey;
+    }
+
+    &[class] {
+        text-decoration: none;
+    }
+}
+
+:focus-visible {
+    outline: rem(2) dashed var(--color-dark);
+    outline-offset: rem(4);
+    transition-duration: 0s !important;
+}

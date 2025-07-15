@@ -1,0 +1,13 @@
+@use '../helpers' as *;
+
+html {
+    overflow: hidden;
+
+    @include tablet {
+        overflow: visible;
+    }
+
+    @include mobile {
+        overflow: visible;
+    }
+}

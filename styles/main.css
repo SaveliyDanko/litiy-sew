@@ -1,0 +1,748 @@
+@charset "UTF-8";
+/**
+  Нормализация блочной модели
+ */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+/**
+  Убираем внутренние отступы слева тегам списков,
+  у которых есть атрибут class
+ */
+:where(ul, ol):where([class]) {
+  padding-left: 0;
+}
+
+/**
+  Убираем внешние отступы body и двум другим тегам,
+  у которых есть атрибут class
+ */
+body,
+:where(blockquote, figure, fieldset):where([class]) {
+  margin: 0;
+}
+
+/**
+  Убираем внешние отступы вертикали нужным тегам,
+  у которых есть атрибут class
+ */
+:where(h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+dl):where([class]) {
+  margin-block: 0;
+}
+
+:where(dd[class]) {
+  margin-left: 0;
+}
+
+:where(fieldset[class]) {
+  padding: 0;
+  border: none;
+}
+
+/**
+  Убираем стандартный маркер маркированному списку,
+  у которого есть атрибут class
+ */
+:where(ul[class]) {
+  list-style: none;
+}
+
+:where(address[class]) {
+  font-style: normal;
+}
+
+/**
+  Обнуляем вертикальные внешние отступы параграфа,
+  объявляем локальную переменную для внешнего отступа вниз,
+  чтобы избежать взаимодействие с более сложным селектором
+ */
+p {
+  --paragraphMarginBottom: 24px;
+  margin-block: 0;
+}
+
+/**
+  Внешний отступ вниз для параграфа без атрибута class,
+  который расположен не последним среди своих соседних элементов
+ */
+p:where(:not([class]):not(:last-child)) {
+  margin-bottom: var(--paragraphMarginBottom);
+}
+
+/**
+  Упрощаем работу с изображениями и видео
+ */
+img,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/**
+  Наследуем свойства шрифт для полей ввода
+ */
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+html {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  height: 100%;
+  /**
+    Убираем скачок интерфейса по горизонтали
+    при появлении / исчезновении скроллбара
+   */
+  scrollbar-gutter: stable;
+}
+
+/**
+  Плавный скролл
+ */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  min-height: 100%;
+  /**
+    Унифицированный интерлиньяж
+   */
+  line-height: 1.5;
+}
+
+/**
+  Нормализация высоты элемента ссылки при его инспектировании в DevTools
+ */
+a:where([class]) {
+  display: inline-flex;
+}
+
+/**
+  Курсор-рука при наведении на элемент
+ */
+button,
+label {
+  cursor: pointer;
+}
+
+/**
+  Приводим к единому цвету svg-элементы
+  (за исключением тех, у которых уже указан
+  атрибут fill со значением 'none' или начинается с 'url')
+ */
+:where([fill]:not([fill=none],
+[fill^=url])) {
+  fill: currentColor;
+}
+
+/**
+  Приводим к единому цвету svg-элементы
+  (за исключением тех, у которых уже указан
+  атрибут stroke со значением 'none')
+ */
+:where([stroke]:not([stroke=none],
+[stroke^=url])) {
+  stroke: currentColor;
+}
+
+/**
+  Чиним баг задержки смены цвета при взаимодействии с svg-элементами
+ */
+svg * {
+  transition-property: fill, stroke;
+}
+
+/**
+  Приведение рамок таблиц в классический 'collapse' вид
+ */
+:where(table) {
+  border-collapse: collapse;
+  border-color: currentColor;
+}
+
+/**
+  Удаляем все анимации и переходы для людей,
+  которые предпочитают их не использовать
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+@font-face {
+  font-family: "BacasimeAntique";
+  src: url("../fonts/BacasimeAntique-Regular.woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "BungeeHairline";
+  src: url("../fonts/BungeeHairline-Regular.woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "ViaodaLibre";
+  src: url("../fonts/ViaodaLibre-Regular.woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "ZenKakuGothicAntique";
+  src: url("../fonts/ZenKakuGothicAntique-Regular.woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  --color-light: #FFFFFF;
+  --color-dark: #000000;
+  --font-family-base: "ZenKakuGothicAntique", sans-serif;
+  --font-family-logo: "BacasimeAntique", sans-serif;
+  --container-width: 120rem;
+  --container-padding-x: 1.5rem;
+  --transition-duration: 0.2s;
+}
+@media (width <= 90.06125rem) {
+  :root {
+    --container-width: 90rem;
+  }
+}
+
+.container {
+  max-width: calc(var(--container-width) + var(--container-padding-x) * 2);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-x);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  border: 0 !important;
+  padding: 0 !important;
+  white-space: nowrap !important;
+  clip-path: inset(100%) !important;
+  clip: rect(0 0 0 0) !important;
+  overflow: hidden !important;
+}
+
+@media (width <= 47.99875rem) {
+  .hidden-mobile {
+    display: none !important;
+  }
+}
+
+@media (width > 47.99875rem) {
+  .visible-mobile {
+    display: none !important;
+  }
+}
+
+body {
+  font-size: clamp(1rem, 0.7450980392rem + 1.045751634vw, 2rem);
+  font-family: var(--font-family-base);
+  color: var(--color-dark);
+  background-color: var(--color-light);
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+  color: var(--color-dark);
+  font-weight: 400;
+}
+
+h1, .h1 {
+  font-size: clamp(2.5rem, -3.0759803922rem + 22.8758169935vw, 24.375rem);
+  font-family: var(--font-family-logo);
+  letter-spacing: 15%;
+}
+
+h2, .h2 {
+  font-size: clamp(1.5625rem, 0.925245098rem + 2.614379085vw, 4.0625rem);
+  font-family: var(--font-family-base);
+}
+
+h6, .h6 {
+  font-size: clamp(0.875rem, 0.5882352941rem + 1.1764705882vw, 2rem);
+  font-family: var(--font-family-base);
+}
+
+a,
+button,
+label,
+input,
+textarea,
+svg * {
+  transition-duration: var(--transition-duration);
+}
+
+a {
+  color: inherit;
+}
+@media (any-hover: hover) {
+  a:hover {
+    color: grey;
+  }
+}
+@media (any-hover: none) {
+  a:active {
+    color: grey;
+  }
+}
+a[class] {
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 0.125rem dashed var(--color-dark);
+  outline-offset: 0.25rem;
+  transition-duration: 0s !important;
+}
+
+html {
+  overflow: hidden;
+}
+@media (width <= 63.99875rem) {
+  html {
+    overflow: visible;
+  }
+}
+@media (width <= 47.99875rem) {
+  html {
+    overflow: visible;
+  }
+}
+
+.header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 3.125rem 1.25rem 1.25rem;
+  z-index: 10;
+}
+.header__logo-link {
+  font-size: 3.75rem;
+  letter-spacing: 15%;
+  font-family: var(--font-family-logo);
+}
+@media (width <= 47.99875rem) {
+  .header__logo-link {
+    font-size: 1.25rem;
+  }
+}
+.header .header__burger-button {
+  width: 3.75rem;
+  aspect-ratio: 1;
+  position: relative;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+@media (width <= 47.99875rem) {
+  .header .header__burger-button {
+    width: 1.25rem;
+    aspect-ratio: 1;
+  }
+}
+.header .header__burger-button .burger-line {
+  position: absolute;
+  left: 50%;
+  width: 100%;
+  height: 0.25rem;
+  background-color: var(--color-dark);
+  border-radius: 1rem;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: center;
+  transform: translateX(-50%);
+}
+.header .header__burger-button .burger-line:nth-child(1) {
+  top: 16.667%;
+}
+.header .header__burger-button .burger-line:nth-child(2) {
+  top: 50%;
+}
+.header .header__burger-button .burger-line:nth-child(3) {
+  top: 83.333%;
+}
+.header .header__burger-button.is-active .burger-line:nth-child(1) {
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.header .header__burger-button.is-active .burger-line:nth-child(2) {
+  opacity: 0;
+}
+.header .header__burger-button.is-active .burger-line:nth-child(3) {
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.first-screen {
+  height: 100vh;
+  background-color: white;
+  background-image: url("../../images/first-screen.png");
+  background-size: cover;
+  position: relative;
+}
+@media (width <= 63.99875rem) {
+  .first-screen {
+    height: 50vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+@media (width <= 47.99875rem) {
+  .first-screen {
+    height: 30vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+.first-screen .off-screen-menu-is-active {
+  right: 0;
+}
+.first-screen__off-screen-menu {
+  position: absolute;
+  top: 0;
+  right: -100%;
+  height: 100vh;
+  width: 15%;
+  padding-top: 8.125rem;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+@media (width <= 63.99875rem) {
+  .first-screen__off-screen-menu {
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    z-index: 7;
+  }
+}
+@media (width <= 47.99875rem) {
+  .first-screen__off-screen-menu {
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    z-index: 7;
+  }
+}
+.first-screen__off-screen-menu__item {
+  position: relative;
+  margin: 1.875rem 1.25rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+.first-screen__off-screen-menu__item::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+.first-screen__off-screen-menu__item:hover::after {
+  width: 100%;
+}
+.first-screen__off-screen-menu__contacts {
+  margin: 6.25rem 0 0 1.25rem;
+  font-weight: 600;
+}
+.first-screen__off-screen-menu__mail, .first-screen__off-screen-menu__telegram {
+  margin: 1.25rem 0 0 1.25rem;
+  font-size: 1.5625rem;
+  font-weight: 600;
+}
+.first-screen__off-screen-menu__email, .first-screen__off-screen-menu__tg {
+  margin-left: 1.25rem;
+  font-size: 1.25rem;
+}
+.first-screen__text {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+}
+@media (width <= 47.99875rem) {
+  .first-screen__text {
+    display: none;
+  }
+}
+.first-screen__text__logo {
+  margin: 0;
+  padding: 0;
+  line-height: 17.5rem;
+  font-size: 24.375rem;
+  font-family: var(--font-family-logo);
+  color: var(--color-light);
+  letter-spacing: 15%;
+}
+@media (width <= 63.99875rem) {
+  .first-screen__text__logo {
+    line-height: 10rem;
+    font-size: 10rem;
+  }
+}
+.first-screen__text__portfolio {
+  margin-bottom: 0.9375rem;
+  padding: 0;
+  line-height: 6rem;
+  font-size: 5rem;
+  font-family: "BungeeHairline";
+  color: var(--color-light);
+}
+@media (width <= 63.99875rem) {
+  .first-screen__text__portfolio {
+    line-height: 4.125rem;
+    font-size: 3.75rem;
+  }
+}
+
+.second-screen {
+  display: flex;
+  justify-content: space-between;
+  padding: 7% 15%;
+  height: 100vh;
+  background-color: var(--color-light);
+}
+@media (width <= 63.99875rem) {
+  .second-screen {
+    flex-direction: column;
+    padding: 3.125rem;
+    height: 140vh;
+  }
+}
+@media (width <= 47.99875rem) {
+  .second-screen {
+    flex-direction: column;
+    padding: 3.125rem;
+    height: 140vh;
+  }
+}
+.second-screen__design {
+  position: relative;
+  width: 45%;
+  background-image: url(../../images/design.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+@media (width <= 63.99875rem) {
+  .second-screen__design {
+    width: 100%;
+    height: 60vh;
+  }
+}
+@media (width <= 47.99875rem) {
+  .second-screen__design {
+    width: 100%;
+    height: 60vh;
+  }
+}
+.second-screen__design__title {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 15%;
+  background-color: rgba(255, 255, 255, 0.75);
+  text-align: center;
+  font-size: 4.0625rem;
+  font-family: "ZenKakuGothicAntique";
+}
+@media (width <= 90.06125rem) {
+  .second-screen__design__title {
+    font-size: 3.4375rem;
+  }
+}
+@media (width <= 47.99875rem) {
+  .second-screen__design__title {
+    font-size: 2.1875rem;
+  }
+}
+.second-screen__modeling {
+  position: relative;
+  width: 45%;
+  background-image: url(../../images/modeling.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+@media (width <= 47.99875rem) {
+  .second-screen__modeling {
+    width: 100%;
+    height: 60vh;
+  }
+}
+@media (width <= 63.99875rem) {
+  .second-screen__modeling {
+    width: 100%;
+    height: 60vh;
+  }
+}
+.second-screen__modeling__title {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 15%;
+  background-color: rgba(255, 255, 255, 0.75);
+  text-align: center;
+  font-size: 4.0625rem;
+  font-family: "ZenKakuGothicAntique";
+}
+@media (width <= 90.06125rem) {
+  .second-screen__modeling__title {
+    font-size: 3.4375rem;
+  }
+}
+@media (width <= 47.99875rem) {
+  .second-screen__modeling__title {
+    font-size: 2.5rem;
+  }
+}
+
+.third-screen {
+  height: 100vh;
+  background-color: var(--color-light);
+  display: flex;
+  justify-content: space-between;
+}
+@media (width <= 63.99875rem) {
+  .third-screen {
+    display: flex;
+    height: 95vh;
+    flex-direction: column;
+  }
+}
+@media (width <= 47.99875rem) {
+  .third-screen {
+    display: flex;
+    height: 90vh;
+    flex-direction: column;
+  }
+}
+.third-screen__text {
+  flex: 0 0 55%;
+  padding-left: 4.375rem;
+  font-family: var("ZenKakuGothicAntique");
+  font-size: 2.1875rem;
+}
+@media (width <= 90.06125rem) {
+  .third-screen__text {
+    padding-left: 3.125rem;
+    font-size: 1.625rem;
+  }
+}
+@media (width <= 63.99875rem) {
+  .third-screen__text {
+    flex: 0 0 40%;
+    order: 2;
+    font-size: 1.25rem;
+  }
+}
+@media (width <= 47.99875rem) {
+  .third-screen__text {
+    flex: 0 0 40%;
+    order: 2;
+    padding: 0;
+    text-align: center;
+    font-size: 1rem;
+  }
+}
+.third-screen__text__title {
+  font-size: 4.375rem;
+  margin: 3.125rem 0rem;
+}
+@media (width <= 90.06125rem) {
+  .third-screen__text__title {
+    font-size: 3.125rem;
+    margin: 3.125rem 0rem;
+  }
+}
+@media (width <= 63.99875rem) {
+  .third-screen__text__title {
+    font-size: 2.5rem;
+    margin: 0.625rem 0rem;
+  }
+}
+@media (width <= 47.99875rem) {
+  .third-screen__text__title {
+    font-size: 1.5625rem;
+    margin: 0.625rem 0rem;
+  }
+}
+.third-screen__text__about-me {
+  font-size: 12.5rem;
+  font-family: "ViaodaLibre";
+  margin-bottom: 3.125rem;
+}
+@media (width <= 90.06125rem) {
+  .third-screen__text__about-me {
+    font-size: 9.0625rem;
+  }
+}
+@media (width <= 63.99875rem) {
+  .third-screen__text__about-me {
+    font-size: 5rem;
+    margin-bottom: 1.25rem;
+  }
+}
+@media (width <= 47.99875rem) {
+  .third-screen__text__about-me {
+    display: none;
+  }
+}
+.third-screen__photo {
+  flex: 0 0 45%;
+  background-image: url(../../images/third-screen-phoyo.jpg);
+  background-size: cover;
+}
+@media (width <= 63.99875rem) {
+  .third-screen__photo {
+    order: 1;
+    flex: 0 0 60%;
+  }
+}
+@media (width <= 47.99875rem) {
+  .third-screen__photo {
+    order: 1;
+    flex: 0 0 60%;
+  }
+}
+
+/*# sourceMappingURL=main.css.map */
