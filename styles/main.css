@@ -417,7 +417,7 @@ html {
 .first-screen {
   height: 100vh;
   background-color: white;
-  background-image: url("images/first-screen.png");
+  background-image: url("/Litiy-Sew/images/first-screen.png");
   background-size: cover;
   position: relative;
 }
