@@ -417,7 +417,7 @@ html {
 .first-screen {
   height: 100vh;
   background-color: white;
-  background-image: url("../../images/first-screen.png");
+  background-image: url("/images/first-screen.png");
   background-size: cover;
   position: relative;
 }
@@ -560,7 +560,7 @@ html {
 .second-screen__design {
   position: relative;
   width: 45%;
-  background-image: url(../../images/design.jpg);
+  background-image: url(/images/design.jpg);
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -599,7 +599,7 @@ html {
 .second-screen__modeling {
   position: relative;
   width: 45%;
-  background-image: url(../../images/modeling.jpg);
+  background-image: url(/images/modeling.jpg);
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -729,7 +729,7 @@ html {
 }
 .third-screen__photo {
   flex: 0 0 45%;
-  background-image: url(../../images/third-screen-phoyo.jpg);
+  background-image: url(/images/third-screen-phoyo.jpg);
   background-size: cover;
 }
 @media (width <= 63.99875rem) {

@@ -86,7 +86,7 @@
 
     &__photo {
         flex: 0 0 45%; 
-        background-image: url(../../images/third-screen-phoyo.jpg);
+        background-image: url(/images/third-screen-phoyo.jpg);
         background-size: cover;
 
         @include tablet {
